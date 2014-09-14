@@ -11,7 +11,12 @@ def powerset(iterable):
     return list(chain.from_iterable([tuple(x) for x in combinations(s, r)] for r in range(1,len(s)+1)))
 
 
-def posterior(lexicon, lex_list, initial=[0.6, 0.3, 0.3, 0.5, 0.5], tol=10**-9, bounds=[(0.001,10),(0.001,5),(0.001,5),(0.001,5),(0.001,5)], verbose=True):
+def posterior(lexicon,
+              lex_list,
+              initial = [0.6, 0.3, 0.3, 0.5, 0.5],
+              tol = 10**-9,
+              bounds = [(0.001,10),(0.001,5),(0.001,5),(0.001,5),(0.001,5)],
+              verbose = True):
     """
     Finds the variances which maximise the probability of the data
     """
@@ -20,7 +25,7 @@ def posterior(lexicon, lex_list, initial=[0.6, 0.3, 0.3, 0.5, 0.5], tol=10**-9, 
         sentiment = []
         source = []
         if len(entry) > 1:
-            for i in range(4):
+            for i in range(len(lex_list)):
                 try:
                     sentiment.append(entry[lex_list[i]])
                     source.append(i)
@@ -29,7 +34,7 @@ def posterior(lexicon, lex_list, initial=[0.6, 0.3, 0.3, 0.5, 0.5], tol=10**-9, 
             compressed = (tuple(source),tuple(sentiment))
             overlap.append(compressed)
     
-    power = powerset(range(4))
+    power = powerset(range(len(lex_list)))
     
     def likely(parameters):
         "e.g. likely([0.5, 0.1, 0.1, 0.1, 0.1])"
