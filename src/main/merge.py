@@ -15,6 +15,10 @@ rms = stats(lex, (GE, PC, WS, SP), verbose=False)
 reweight(lex, rms)
 new = stats_dash(lex, (GE, WS, SP), verbose=False)
 reweight_dash(lex, new)
+
+with open('../../data/premerge.pk', 'wb') as f:
+    pickle.dump(lex, f)
+
 inf = posterior(lex, (GE, PC, WS, SP), tol=10**-9, initial=[ 0.52847201,  0.32771543,  0.31697963,  0.44575393,  0.60947068])
 
 deviation = {'prior':inf['x'][0],

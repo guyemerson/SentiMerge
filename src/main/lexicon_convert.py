@@ -60,5 +60,5 @@ def lexicon_convert(in_file, verbose=True):
 if __name__ == '__main__':
     import pickle
     lex = lexicon_convert('../../data/merged_lex_hash.pm')
-    with open('../../data/lexicon_string.pk', 'wb') as f:
+    with open('../../data/raw_lexicon.pk', 'wb') as f:
         pickle.dump(lex, f)
