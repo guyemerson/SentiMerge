@@ -99,7 +99,7 @@ def evaluate(lex,
 if __name__ == "__main__":
     import pickle
     from numpy import arange
-    lex_file  = '../../data/sentimerge_nospin.pk'
+    lex_file  = '../../data/sentimerge_backoff.pk'
     with open(lex_file, 'rb') as f:
         lex, weight = pickle.load(f)
     for lemma, pol in list(lex.items()):

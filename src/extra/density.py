@@ -2,7 +2,7 @@ import pickle
 from scipy.stats import gaussian_kde
 from numpy import arange
 
-filename = '../../data/sentimerge.pk'
+filename = '../../data/sentimerge_backoff.pk'
 
 with open(filename, 'rb') as f:
     data, _ = pickle.load(f)

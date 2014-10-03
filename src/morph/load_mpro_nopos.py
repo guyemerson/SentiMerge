@@ -1,7 +1,9 @@
+import pickle
 from collections import Counter
 
 input_file  = '../../data/morph/mpro_out.txt'
 output_file = '../../data/morph/preproc_nopos.txt'
+pickle_file = '../../data/morph/preproc_nopos.pk'
 
 data = dict()
 
@@ -12,8 +14,6 @@ def bare(text):
     text = ''.join(text.split('+'))
     return text
 
-skip = False
-
 with open(input_file, 'r') as f:
     for line in f:
         line = line.strip()
@@ -21,10 +21,6 @@ with open(input_file, 'r') as f:
             text = line
             continue
         if text[0] == ',':  # Ignore items that weren't analysed as a whole
-            skip = True
-            continue
-        if skip:
-            skip = False
             continue
         outputs = text.strip('{}').split('};{')  # Find all analyses
         featsets = []  # Save analyses as dictionaries
@@ -72,5 +68,9 @@ with open(output_file, 'w') as f:
         if len(lemmas) > 1:
             for lem in lemmas:
                 if lem in single:
-                    continue
-            f.write(string + '\t' + ','.join(lemmas) + '\n')
+                    break
+            else:
+                f.write(string + '\t' + ','.join(lemmas) + '\n')
+
+with open(pickle_file, 'wb') as f:
+    pickle.dump(data, f)
