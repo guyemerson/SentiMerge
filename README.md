@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/20269/guyemerson/SentiMerge.svg)](https://zenodo.org/badge/latestdoi/20269/guyemerson/SentiMerge)
+
 SentiMerge
 ==========
 
